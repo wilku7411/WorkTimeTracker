@@ -7,6 +7,7 @@ namespace WorkTimeTracker
 		private const int WorkDayCompletedInMs = 8 * 60 * 60 * 1000;
 		private const int TestValue = 4;
 		private TimeSpan CollectedTime;
+		private Form EventFillForm;
 
 		private bool bOvertime = false;
 		private TimeSpan OverTime;
@@ -128,6 +129,21 @@ namespace WorkTimeTracker
 		private void button1_MouseLeave(object sender, EventArgs e)
 		{
 			OnMouseLeave();
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if(EventFillForm == null)
+			{
+				EventFillForm = new Form2(this, CollectedTime);
+				EventFillForm.Show();
+				EventFillForm.FormClosed += delegate { InvalidateEventFillForm(); };
+			}
+		}
+
+		public void InvalidateEventFillForm()
+		{
+			EventFillForm = null;
 		}
 	}
 }

@@ -38,6 +38,7 @@
 			label2 = new Label();
 			label3 = new Label();
 			ffw = new Button();
+			button2 = new Button();
 			SuspendLayout();
 			// 
 			// progressBar1
@@ -74,7 +75,7 @@
 			// 
 			label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			label1.AutoSize = true;
-			label1.Location = new Point(162, 9);
+			label1.Location = new Point(295, 9);
 			label1.Name = "label1";
 			label1.Size = new Size(38, 15);
 			label1.TabIndex = 2;
@@ -83,7 +84,7 @@
 			// progressBar2
 			// 
 			progressBar2.Dock = DockStyle.Bottom;
-			progressBar2.Location = new Point(0, 126);
+			progressBar2.Location = new Point(0, 144);
 			progressBar2.Name = "progressBar2";
 			progressBar2.Size = new Size(617, 9);
 			progressBar2.Style = ProgressBarStyle.Continuous;
@@ -93,7 +94,7 @@
 			// 
 			label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			label2.AutoSize = true;
-			label2.Location = new Point(162, 89);
+			label2.Location = new Point(295, 89);
 			label2.Name = "label2";
 			label2.Size = new Size(38, 15);
 			label2.TabIndex = 4;
@@ -103,7 +104,7 @@
 			// 
 			label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			label3.AutoSize = true;
-			label3.Location = new Point(122, 74);
+			label3.Location = new Point(253, 74);
 			label3.Name = "label3";
 			label3.Size = new Size(119, 15);
 			label3.TabIndex = 5;
@@ -125,14 +126,25 @@
 			ffw.MouseDown += ffw_MouseDown;
 			ffw.MouseUp += ffw_MouseUp;
 			// 
+			// button2
+			// 
+			button2.Location = new Point(12, 40);
+			button2.Name = "button2";
+			button2.Size = new Size(104, 23);
+			button2.TabIndex = 7;
+			button2.Text = "button2";
+			button2.UseVisualStyleBackColor = true;
+			button2.Click += button2_Click;
+			// 
 			// Form1
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			AutoSizeMode = AutoSizeMode.GrowAndShrink;
-			BackgroundImageLayout = ImageLayout.None;
-			ClientSize = new Size(617, 135);
+			BackgroundImageLayout = ImageLayout.Center;
+			ClientSize = new Size(617, 153);
 			ControlBox = false;
+			Controls.Add(button2);
 			Controls.Add(ffw);
 			Controls.Add(label3);
 			Controls.Add(label2);
@@ -147,7 +159,7 @@
 			Name = "Form1";
 			RightToLeft = RightToLeft.No;
 			StartPosition = FormStartPosition.CenterScreen;
-			Text = "                                         P R A C K A   T I M E";
+			Text = "P R A C K A   T I M E";
 			TopMost = true;
 			ResumeLayout(false);
 			PerformLayout();
@@ -163,5 +175,6 @@
 		private Label label2;
 		private Label label3;
 		private Button ffw;
+		private Button button2;
 	}
 }
