@@ -38,7 +38,7 @@
 			label2 = new Label();
 			label3 = new Label();
 			ffw = new Button();
-			button2 = new Button();
+			RecordEvent = new Button();
 			SuspendLayout();
 			// 
 			// progressBar1
@@ -126,15 +126,15 @@
 			ffw.MouseDown += ffw_MouseDown;
 			ffw.MouseUp += ffw_MouseUp;
 			// 
-			// button2
+			// RecordEvent
 			// 
-			button2.Location = new Point(12, 40);
-			button2.Name = "button2";
-			button2.Size = new Size(104, 23);
-			button2.TabIndex = 7;
-			button2.Text = "button2";
-			button2.UseVisualStyleBackColor = true;
-			button2.Click += button2_Click;
+			RecordEvent.Location = new Point(12, 40);
+			RecordEvent.Name = "RecordEvent";
+			RecordEvent.Size = new Size(104, 45);
+			RecordEvent.TabIndex = 7;
+			RecordEvent.Text = "Znowu kurwa coś";
+			RecordEvent.UseVisualStyleBackColor = true;
+			RecordEvent.Click += button2_Click;
 			// 
 			// Form1
 			// 
@@ -144,7 +144,7 @@
 			BackgroundImageLayout = ImageLayout.Center;
 			ClientSize = new Size(617, 153);
 			ControlBox = false;
-			Controls.Add(button2);
+			Controls.Add(RecordEvent);
 			Controls.Add(ffw);
 			Controls.Add(label3);
 			Controls.Add(label2);
@@ -175,6 +175,6 @@
 		private Label label2;
 		private Label label3;
 		private Button ffw;
-		private Button button2;
+		private Button RecordEvent;
 	}
 }

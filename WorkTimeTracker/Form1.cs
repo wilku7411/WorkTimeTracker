@@ -133,7 +133,7 @@ namespace WorkTimeTracker
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			if(EventFillForm == null)
+			if (EventFillForm == null)
 			{
 				EventFillForm = new Form2(this, CollectedTime);
 				EventFillForm.Show();

@@ -12,26 +12,74 @@ namespace WorkTimeTracker
 {
 	public partial class Form2 : Form
 	{
-
+		private DayEvents TotalEvents;
 		private Form1 WorkEventOwner;
+		private Random Rnd = new Random();
+		private TimeSpan CachedTimeStamp;
 
 		public Form2(Form Owner, TimeSpan T)
 		{
 			InitializeComponent();
 			WorkEventOwner = (Form1)Owner;
+			CachedTimeStamp = T;
 			SubmitEvent.Text = T.ToString();
 			OptionalTaskAlias.Enabled = false;
-
+			TotalEvents = new DayEvents();
+			DayEvents.Deserialize(ref TotalEvents);
 		}
 
 		private void SubmitEvent_Click(object sender, EventArgs e)
 		{
+			WorkTrackerEvent NewEvent = new WorkTrackerEvent(
+				EventTitle.Text,
+				EventDescription.Text,
+				OptionalTaskAlias.Text,
+				GetTags(),
+				CachedTimeStamp);
 
+			TotalEvents.AddEvent(NewEvent);
+			DayEvents.Serialize(ref TotalEvents);
+			Close();
 		}
-
+		private void Discard_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 		private void WantToMentionOptionalTask_CheckedChanged(object sender, EventArgs e)
 		{
 			OptionalTaskAlias.Enabled = WantToMentionOptionalTask.Checked;
+		}
+
+		private void AddTag_Click(object sender, EventArgs e)
+		{
+			AddTag.Clear();
+		}
+
+		private void AddTag_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == ((char)Keys.Enter))
+			{
+
+				Button TagRepresentation = new Button();
+				Color RandomColor = Color.FromArgb(Rnd.Next(256), Rnd.Next(256), Rnd.Next(256));
+				TagRepresentation.BackColor = RandomColor;
+				TagRepresentation.Text = AddTag.Text;
+				TagRepresentation.AutoSize = true;
+				TagRepresentation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+				AddTag.Text = "";
+
+				TagsPanel.Controls.Add(TagRepresentation);
+
+			}
+		}
+		private List<string> GetTags()
+		{
+			List<string> Tags = new List<string>();
+			foreach (Button Tag in TagsPanel.Controls)
+			{
+				Tags.Add(Tag.Text);
+			}
+			return Tags;
 		}
 	}
 }
