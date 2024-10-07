@@ -35,6 +35,11 @@ namespace WorkTimeTracker
 			Tags = tags.ToHashSet();
 			TimeStamp = timeStamp;
 		}
+
+		public List<string> GetTagsList()
+		{
+			return Tags.ToList();
+		}
     }
 
 	[System.Serializable]
@@ -44,10 +49,12 @@ namespace WorkTimeTracker
 		static private string EventsFileName = @"\Events.wtt";
 
 		private Dictionary<DateTime, List<WorkTrackerEvent>> Events;
+		private List<string> CachedTags;
 
 		public DayEvents()
 		{
 			Events = new Dictionary<DateTime, List<WorkTrackerEvent>>();
+			CachedTags = new List<string>();
 		}
 
 		public void AddEvent(WorkTrackerEvent WorkEvent)
@@ -61,6 +68,7 @@ namespace WorkTimeTracker
 			{
 				Events.Add(Today, new List<WorkTrackerEvent>() { WorkEvent });
 			}
+			CachedTags.AddRange(WorkEvent.GetTagsList());
 		}
 
 		public List<WorkTrackerEvent> GetEventsFromDay(DateTime Day) 
@@ -72,6 +80,15 @@ namespace WorkTimeTracker
 			return new List<WorkTrackerEvent>();
 		}
 
+		public List<string> GetAllCachedTags()
+		{
+			return CachedTags;
+		}
+
+		public bool DoesEventFileExist()
+		{
+			return File.Exists(RecordedEvetsFilePath + EventsFileName);
+		}
 
 		static public void Serialize(ref DayEvents ObjectsSystem)
 		{
@@ -89,11 +106,16 @@ namespace WorkTimeTracker
 
 		static public void Deserialize(ref DayEvents ObjectsSystem)
 		{
+			if (!ObjectsSystem.DoesEventFileExist())
+			{
+				return;
+			}
+
 			//Format the object as Binary  
 			BinaryFormatter Formatter = new BinaryFormatter();
 
 			//Reading the file 
-			FileStream TagSystemStream = File.Open(RecordedEvetsFilePath + EventsFileName, FileMode.OpenOrCreate);
+			FileStream TagSystemStream = File.Open(RecordedEvetsFilePath + EventsFileName, FileMode.Open);
 
 			try
 			{

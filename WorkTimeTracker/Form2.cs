@@ -28,6 +28,20 @@ namespace WorkTimeTracker
 			DayEvents.Deserialize(ref TotalEvents);
 		}
 
+		private void FillTagsPanel()
+		{
+			foreach (string Tag in TotalEvents.GetAllCachedTags())
+			{
+				Button TagRepresentation = new Button();
+				Color RandomColor = Color.FromArgb(Rnd.Next(256), Rnd.Next(256), Rnd.Next(256));
+				TagRepresentation.BackColor = RandomColor;
+				TagRepresentation.Text = Tag;
+				TagRepresentation.AutoSize = true;
+				TagRepresentation.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+				TagsPanel.Controls.Add(TagRepresentation);
+			}
+		}
+
 		private void SubmitEvent_Click(object sender, EventArgs e)
 		{
 			WorkTrackerEvent NewEvent = new WorkTrackerEvent(
@@ -80,6 +94,11 @@ namespace WorkTimeTracker
 				Tags.Add(Tag.Text);
 			}
 			return Tags;
+		}
+
+		private void Form2_Load(object sender, EventArgs e)
+		{
+			FillTagsPanel();
 		}
 	}
 }
